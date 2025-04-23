@@ -30,7 +30,6 @@ return {
             out[k] = v
           end
         end
-
         return out
       end,
       mappings = {},

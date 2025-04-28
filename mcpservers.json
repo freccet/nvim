@@ -1,0 +1,28 @@
+{
+  "nativeMCPServers": [
+    
+  ],
+  "mcpServers": {
+    "todoist": {
+      "env": {
+        "TODOIST_API_TOKEN": "your_token_here"
+      },
+      "disabled": true,
+      "args": [
+        "-y",
+        "@abhiz123/todoist-mcp-server"
+      ],
+      "command": "npx"
+    },
+    "codegen": {
+      "env": {
+        "OPENAI_KEY": "$OPENAI_API_KEY"
+      },
+      "disabled": true,
+      "args": [
+        "mcp-server-codegen --verbose"
+      ],
+      "command": "uvx"
+    }
+  }
+}

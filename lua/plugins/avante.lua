@@ -5,7 +5,7 @@ return {
     lazy = false,
     version = false, -- set this if you want to always pull the latest change
     opts = {
-      provider = "deepseek",
+      provider = "deepseek", -- Set the default provider to the working model
       vendors = {
         deepseek = {
           __inherited_from = "openai",
@@ -13,7 +13,23 @@ return {
           endpoint = "https://api.deepseek.com",
           model = "deepseek-coder",
           max_tokens = 4096,
+          enabled = false, -- Disable by default
         },
+
+        claude = {
+          endpoint = "https://api.anthropic.com",
+          model = "claude-3-5-sonnet-20241022",
+          timeout = 30000,
+          temperature = 0,
+          max_tokens = 4096,
+          disable_tools = true,
+          enabled = true, -- Explicitly enable
+        },
+      },
+      -- Add debug logging
+      log = {
+        level = "debug", -- Add verbose logging
+        file = vim.fn.stdpath("log") .. "/avante.log", -- Specify log file
       },
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`

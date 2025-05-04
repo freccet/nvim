@@ -14,6 +14,9 @@ return {
       bullet = {
         right_pad = 1,
       },
+      latex = {
+        enabled = false,
+      },
     },
   },
 }

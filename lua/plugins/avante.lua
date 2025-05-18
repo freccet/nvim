@@ -77,14 +77,14 @@ return {
     --   edit = "<leader>ce", -- Edit selected code with AI
     --   refresh = "<leader>cr", -- Refresh AI response
     -- },
-
     -- UI configuration
     ui = {
       highlight_groups = {
         diff_add = "DiffAdd",
         diff_delete = "DiffDelete",
       },
-      override_timeoutlen = 500,
+      stream_response = true,
+      -- override_timeoutlen = 500,
     },
 
     -- Custom keymappings

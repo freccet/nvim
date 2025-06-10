@@ -2,7 +2,7 @@ return {
   "yetone/avante.nvim",
   event = "VeryLazy",
   lazy = false,
-  version = false, -- Always get the latest version
+  version = "*", -- Use the latest stable version
 
   -- This builds the necessary components
   build = "make", -- Use "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" for Windows
@@ -29,31 +29,29 @@ return {
 
   opts = {
     -- Set Claude as the provider
-    provider = "claude",
+    provider = "claude", -- Default provider
+    providers = {
+      claude = {
+        endpoint = "https://api.anthropic.com",
+        model = "claude-3-7-sonnet-20250219",
 
-    -- Configure Claude settings
-    claude = {
-      endpoint = "https://api.anthropic.com",
-      model = "claude-3-7-sonnet-20250219", -- Or use "claude-3-7-sonnet-20250219" for the newer model
+        -- Model parameters
+        extra_request_body = {
+          temperature = 0.1, -- Lower for more deterministic responses
+          max_tokens = 4096,
+        },
+        -- Disable tools completely (all three settings needed for complete disabling)
+        -- disable_tools = true,
+        -- tools = false,
+        -- tool_choice = "none",
 
-      -- API key (you can also use environment variable ANTHROPIC_API_KEY)
-      -- api_key_name = "your-api-key-here",  -- Uncomment and add your key if not using env var
-
-      -- Model parameters
-      temperature = 0.1, -- Lower for more deterministic responses
-      max_tokens = 4096,
-
-      -- Disable tools completely (all three settings needed for complete disabling)
-      disable_tools = true,
-      -- tools = false,
-      -- tool_choice = "none",
-
-      -- Optional: Enable Claude thinking mode (for Claude 3.7 Sonnet)
-      -- Note: There might be compatibility issues when using tools with thinking mode
-      -- thinking = {
-      --   type = "enabled",
-      --   budget_tokens = 2048,
-      -- },
+        -- Optional: Enable Claude thinking mode (for Claude 3.7 Sonnet)
+        -- Note: There might be compatibility issues when using tools with thinking mode
+        -- thinking = {
+        --   type = "enabled",
+        --   budget_tokens = 2048,
+        -- },
+      },
     },
 
     -- Behavior configuration
@@ -102,76 +100,3 @@ return {
     -- },
   },
 }
--- return {
---   {
---     "yetone/avante.nvim",
---     event = "VeryLazy",
---     lazy = false,
---     version = false, -- set this if you want to always pull the latest change
---     opts = {
---       provider = "deepseek", -- Set the default provider to the working model
---       vendors = {
---         deepseek = {
---           __inherited_from = "openai",
---           api_key_name = "DEEPSEEK_API_KEY",
---           endpoint = "https://api.deepseek.com",
---           model = "deepseek-coder",
---           max_tokens = 4096,
---           enabled = false, -- Disable by default
---         },
---
---         claude = {
---           endpoint = "https://api.anthropic.com",
---           model = "claude-3-5-sonnet-20241022",
---           timeout = 30000,
---           temperature = 0,
---           max_tokens = 4096,
---           disable_tools = true,
---           enabled = true, -- Explicitly enable
---         },
---       },
---       -- Add debug logging
---       log = {
---         level = "debug", -- Add verbose logging
---         file = vim.fn.stdpath("log") .. "/avante.log", -- Specify log file
---       },
---     },
---     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
---     build = "make",
---     -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
---     dependencies = {
---       "nvim-treesitter/nvim-treesitter",
---       "stevearc/dressing.nvim",
---       "nvim-lua/plenary.nvim",
---       "MunifTanjim/nui.nvim",
---       --- The below dependencies are optional,
---       "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
---       "zbirenbaum/copilot.lua", -- for providers='copilot'
---       {
---         -- support for image pasting
---         "HakonHarnes/img-clip.nvim",
---         event = "VeryLazy",
---         opts = {
---           -- recommended settings
---           default = {
---             embed_image_as_base64 = false,
---             prompt_for_file_name = false,
---             drag_and_drop = {
---               insert_mode = true,
---             },
---             -- required for Windows users
---             use_absolute_path = true,
---           },
---         },
---       },
---       {
---         -- Make sure to set this up properly if you have lazy=true
---         "MeanderingProgrammer/render-markdown.nvim",
---         opts = {
---           file_types = { "markdown", "Avante" },
---         },
---         ft = { "markdown", "Avante" },
---       },
---     },
---   },
--- }

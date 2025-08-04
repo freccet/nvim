@@ -3,8 +3,8 @@
 -- Add any additional keymaps here
 local map = vim.keymap.set
 
-map("n", "<C-d>", "<C-d>zz", { desc = "Center line", noremap = true, silent = true })
-map("n", "<C-u>", "<C-u>zz", { desc = "Center line", noremap = true, silent = true })
+-- map("n", "<C-d>", "<C-d>zz", { desc = "Center line", noremap = true, silent = true })
+-- map("n", "<C-u>", "<C-u>zz", { desc = "Center line", noremap = true, silent = true })
 map("n", "<leader>k", '<cmd>lua require("kubectl").toggle()<cr>', { noremap = true, silent = true })
 
 -- E5107: Error loading lua [string ":lua"]:1: function arguments expected near '}'
